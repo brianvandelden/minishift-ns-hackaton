@@ -20,7 +20,7 @@ public class WebTestForwardRoute extends RouteBuilder {
 //                .to("file://C:\\Users\\Niek Arends\\Documents\\Workspaces\\minishift-ns-hackaton\\demo2\\3\\");
         restConfiguration()
                 .component("jetty")
-                .host("localhost")
+//                .host("localhost")
                 .port(8080)
                 .bindingMode(RestBindingMode.auto);
 
