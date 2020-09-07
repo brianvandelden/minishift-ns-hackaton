@@ -5,6 +5,6 @@ RUN mvn -f /usr/src/app/pom.xml clean package
 
 FROM adoptopenjdk:14-jre-hotspot
 RUN ls
-COPY target/demo-0.0.1-SNAPSHOT.jar /usr/src/demo-0.0.1-SNAPSHOT.jar
+COPY target/demo-0.0.1-SNAPSHOT.jar /usr/lib/demo-0.0.1-SNAPSHOT.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/src/demo-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","/usr/lib/demo-0.0.1-SNAPSHOT.jar"]
