@@ -1,5 +1,5 @@
-FROM adoptopenjdk:14-jre-hotspot
-RUN ./mvnw -f pom.xml clean package
-COPY target/demo-0.0.1-SNAPSHOT.jar /usr/lib/demo-0.0.1-SNAPSHOT.jar
+FROM maven:latest
+COPY . /build
+RUN mvn -f /build/pom.xml clean package
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/lib/demo-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","/build/target/demo-0.0.1-SNAPSHOT.jar"]
