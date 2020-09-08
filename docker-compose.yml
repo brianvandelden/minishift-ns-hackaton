@@ -8,4 +8,6 @@ services:
         build:
             context: ./demo2
         image: demo2
+        ports:
+            - "8080:8080"
       
