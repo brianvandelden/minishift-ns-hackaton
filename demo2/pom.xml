@@ -19,21 +19,6 @@
     </properties>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>org.apache.camel.springboot</groupId>-->
-<!--            <artifactId>camel-servlet-starter</artifactId>-->
-<!--            <version>${camel.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.camel.springboot</groupId>-->
-<!--            <artifactId>camel-jackson-starter</artifactId>-->
-<!--            <version>${camel.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.camel.springboot</groupId>-->
-<!--            <artifactId>camel-swagger-java-starter</artifactId>-->
-<!--            <version>${camel.version}</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-http-starter</artifactId>
@@ -64,6 +49,14 @@
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <configuration>
+                    <mainClass>com.brianvandelden.demo.DemoApplication</mainClass>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -106,7 +99,6 @@
                 </executions>
 
             </plugin>
-
         </plugins>
     </build>
 </project>

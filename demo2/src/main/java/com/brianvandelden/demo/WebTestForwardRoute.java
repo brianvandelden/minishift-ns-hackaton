@@ -19,15 +19,17 @@ public class WebTestForwardRoute extends RouteBuilder {
 
         rest("/hoi")
                 .get("/proxy").to("direct:test")
-                .get("/test").to("direct:test2");
+                .get("/test").to("direct:echo");
 
-        from("direct:test2")
-                .transform().constant("hallo");
+        from("direct:echo")
+                .setHeader(Exchange.CONTENT_TYPE, constant("application/json"))
+                .setBody(simple("${env:HOST}"));
 
         from("direct:test")
+                //asd
                 .log("${body}")
                 .setHeader(Exchange.HTTP_METHOD, constant("GET"))
-                .to("http://minishift-ns-hackaton:8080/hello?bridgeEndpoint=true");
+                .toD("http://${env:HOST}/${env:HTTPPATH}?bridgeEndpoint=true");
     }
 
 }
