@@ -16,7 +16,6 @@ pipeline {
                                   return (it.object().status.phase == "Complete")
                                 }
                               }
-                        // openshift.selector("bc", "demo1").startBuild('--namespace=myproject')
                     }
                 }
             }
