@@ -27,8 +27,8 @@ pipeline {
             steps {
                 echo "Approved the Build. Tagging with ${TAG}"
                 script {
-                    def now = LocalDateTime.now()
-                    def stringtijd = now.format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
+                    def now = new Date()
+                    def stringtijd = now.format("yyMMddHHmm", TimeZone.getTimeZone('UTC'))
                     openshiftTag alias: 'false', apiURL: '', authToken: '', destStream: 'demo1', destTag: "${TAG}_${stringtijd}", destinationAuthToken: '', destinationNamespace: 'myproject', namespace: 'myproject', srcStream: 'demo1', srcTag: 'latest', verbose: 'true'
                 }
             }
