@@ -27,8 +27,9 @@ pipeline {
             steps {
                 echo "Approved the Build. Tagging with ${TAG}"
                 script {
-                    DATETIME_TAG = java.time.LocalDateTime.now()
-                    openshiftTag alias: 'false', apiURL: '', authToken: '', destStream: 'demo1', destTag: "${TAG}_${DATETIME_TAG}", destinationAuthToken: '', destinationNamespace: 'myproject', namespace: 'myproject', srcStream: 'demo1', srcTag: 'latest', verbose: 'true'
+                    def now = LocalDateTime.now()
+                    def stringtijd = now.format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
+                    openshiftTag alias: 'false', apiURL: '', authToken: '', destStream: 'demo1', destTag: "${TAG}_${stringtijd}", destinationAuthToken: '', destinationNamespace: 'myproject', namespace: 'myproject', srcStream: 'demo1', srcTag: 'latest', verbose: 'true'
                 }
             }
         }
