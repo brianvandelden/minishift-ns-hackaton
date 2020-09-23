@@ -5,6 +5,16 @@ pipeline {
         timeout(time: 20, unit: 'MINUTES') 
     }
     stages {
+        stage('Pre-build variabelen zetten') {
+            steps {
+                script {
+                    script {
+                        def now = new Date()
+                        def stringtijd = now.format("yyyyMMddHHmm", TimeZone.getTimeZone('UTC'))
+                    }
+                }
+            }
+        }
         stage('Build') {
             steps {
                 echo "Starting build"
@@ -26,8 +36,6 @@ pipeline {
             }
             steps {
                 script {
-                    def now = new Date()
-                    def stringtijd = now.format("yyyyMMddHHmm", TimeZone.getTimeZone('UTC'))
                     echo "Tagging with ${stringtijd}"
                     openshiftTag alias: 'false', apiURL: '', authToken: '', destStream: 'demo1', destTag: "${stringtijd}", destinationAuthToken: '', destinationNamespace: 'myproject', namespace: 'myproject', srcStream: 'demo1', srcTag: 'latest', verbose: 'false'
                 }
@@ -36,8 +44,17 @@ pipeline {
         
         stage("Trigger deploy to Prod") {
             steps {
-                echo "Deploy to Prod Step"
-                openshiftDeploy apiURL: '', authToken: '', depCfg: 'demo1', namespace: 'prod', verbose: 'false', waitTime: '', waitUnit: 'sec'            }
+                    echo "Deploy to Prod Step"
+                    // openshiftDeploy apiURL: '', authToken: '', depCfg: 'demo1', namespace: 'prod', verbose: 'false', waitTime: '', waitUnit: 'sec'            }
+                    script {
+                    openshift.withCluster( 'mycluster' ) {
+                        openshift.withProject('prod') {
+                            def dc = openshift.selector('dc', "demo1")
+
+                        }
+                    }
+                }
+            }
         }
     }
 }
