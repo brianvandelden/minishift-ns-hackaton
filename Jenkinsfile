@@ -26,7 +26,7 @@ pipeline {
             }
             steps {
                 echo "Approved the Build. Tagging with ${TAG}"
-                openshiftTag alias: 'false', apiURL: '', authToken: '', destStream: '$(TAG)', destTag: '', destinationAuthToken: '', destinationNamespace: 'myproject', namespace: 'myproject', srcStream: 'demo1', srcTag: 'latest', verbose: 'false'
+                openshiftTag alias: 'false', apiURL: '', authToken: '', destStream: 'dev', destTag: '$(TAG)', destinationAuthToken: '', destinationNamespace: 'dev', namespace: 'myproject', srcStream: 'demo1', srcTag: 'latest', verbose: 'true'
             }
         }
         
