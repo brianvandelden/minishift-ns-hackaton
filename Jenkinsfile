@@ -28,8 +28,7 @@ pipeline {
                 script {
                     echo "Tagging with ${stringtijd}"
                     def now = new Date()
-                    stringtijd = now.format("yyMMddHHmm", TimeZone.getTimeZone('UTC'))
-                    openshiftTag alias: 'false', apiURL: '', authToken: '', destStream: 'demo1', destTag: "${stringtijd}", destinationAuthToken: '', destinationNamespace: 'myproject', namespace: 'myproject', srcStream: 'demo1', srcTag: 'latest', verbose: 'true'
+                    openshiftTag alias: 'false', apiURL: '', authToken: '', destStream: 'demo1', destTag: "now.format("yyMMddHHmm", TimeZone.getTimeZone('UTC'))", destinationAuthToken: '', destinationNamespace: 'myproject', namespace: 'myproject', srcStream: 'demo1', srcTag: 'latest', verbose: 'true'
                 }
             }
         }
