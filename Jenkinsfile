@@ -28,7 +28,7 @@ pipeline {
                 echo "Approved the Build. Tagging with ${TAG}"
                 script {
                     DATETIME_TAG = java.time.LocalDateTime.now()
-                    openshiftTag alias: 'false', apiURL: '', authToken: '', destStream: 'demo1', destTag: "${TAG}-${DATETIME_TAG}", destinationAuthToken: '', destinationNamespace: 'myproject', namespace: 'myproject', srcStream: 'demo1', srcTag: 'latest', verbose: 'true'
+                    openshiftTag alias: 'false', apiURL: '', authToken: '', destStream: 'demo1', destTag: "${TAG}_${DATETIME_TAG}", destinationAuthToken: '', destinationNamespace: 'myproject', namespace: 'myproject', srcStream: 'demo1', srcTag: 'latest', verbose: 'true'
                 }
             }
         }
