@@ -20,16 +20,16 @@ pipeline {
             input {
                 message "Do you approve the build on dev?"
                 ok "Yes, I do."
-                parameters {
-                    string(name: 'TAG', defaultValue: '', description: 'Prefix die je aan de build-tag wilt geven')
-                }
+                // parameters {
+                //     string(name: 'TAG', defaultValue: '', description: 'Prefix die je aan de build-tag wilt geven')
+                // }
             }
             steps {
                 script {
-                    echo "${TAG}_${stringtijd}"
+                    echo "Tagging with ${stringtijd}"
                     def now = new Date()
                     def stringtijd = now.format("yyMMddHHmm", TimeZone.getTimeZone('UTC'))
-                    openshiftTag alias: 'false', apiURL: '', authToken: '', destStream: 'demo1', destTag: "${TAG}_${stringtijd}", destinationAuthToken: '', destinationNamespace: 'myproject', namespace: 'myproject', srcStream: 'demo1', srcTag: 'latest', verbose: 'true'
+                    openshiftTag alias: 'false', apiURL: '', authToken: '', destStream: 'demo1', destTag: "${stringtijd}", destinationAuthToken: '', destinationNamespace: 'myproject', namespace: 'myproject', srcStream: 'demo1', srcTag: 'latest', verbose: 'true'
                 }
             }
         }
