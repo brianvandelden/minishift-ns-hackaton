@@ -8,6 +8,18 @@ pipeline {
         stage('Build') {
             steps {
                 sleep 5
+                script {
+                    openshift.withCluster() {
+                        openshift.withProject() {
+                        def builds = openshift.selector("bc", "demo1").related('builds')
+                        timeout(5) { 
+                                builds.untilEach(1) {
+                                    return (it.object().status.phase == "Complete")
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         stage("Deploy to Dev") {
