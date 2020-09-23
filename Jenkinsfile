@@ -13,6 +13,7 @@ pipeline {
         stage("Deploy to Dev") {
             steps {
                 echo "Deploy to Dev Step"
+                sleep 1
             }
         }
         stage("Approve Build") {
@@ -30,6 +31,7 @@ pipeline {
         stage("Deploy to Prod") {
             steps {
                 echo "Deploy to Prod Step"
+                sleep 1
             }
         }
     }
