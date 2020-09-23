@@ -8,8 +8,7 @@ pipeline {
         stage('Build') {
             steps {
                 sleep 5
-                openshiftBuild apiURL: '', authToken: '', bldCfg: 'demo1', buildName: '', checkForTriggeredDeployments: 'true', commitID: '', namespace: '', showBuildLogs: 'false', verbose: 'false', waitTime: '10', waitUnit: 'min'
-            }
+                openshiftBuild apiURL: '', authToken: '', bldCfg: 'demo1', buildName: '', checkForTriggeredDeployments: 'false', commitID: '', namespace: 'myproject', showBuildLogs: 'true', verbose: 'false', waitTime: '1', waitUnit: 'min'            }
         }
         stage("Deploy to Dev") {
             steps {
