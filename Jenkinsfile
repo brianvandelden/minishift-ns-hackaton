@@ -49,23 +49,26 @@ pipeline {
             steps {
                 echo "Deploy to Prod Step"
                 // openshiftDeploy apiURL: '', authToken: '', depCfg: 'demo1', namespace: 'prod', verbose: 'false', waitTime: '', waitUnit: 'sec'           
-                openshiftCreateResource apiURL: '', authToken: '', jsonyaml: '''apiVersion: apps.openshift.io/v1
-kind: Deployment
+                openshiftCreateResource apiURL: '', authToken: '', jsonyaml: '''apiVersion: v1
+kind: DeploymentConfig
 metadata:
   name: demo1
 spec:
-  replicas: 1
+  replicas: 5
   selector:
-    matchLabels:
-      app: demo1
-  template:
-    metadata:
-      labels:
-        app: demo1
-    spec:
-      containers:
-      - name: demo1
-        image: myproject/demo1:${stringtijd}''', namespace: 'prod', verbose: 'false'
+    name: demo1
+  triggers:
+  - type: ConfigChange 
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - demo1
+      from:
+        kind: ImageStreamTag
+        name: demo1:${stringtijd}
+    type: ImageChange  
+  strategy:
+    type: Rolling''', namespace: 'prod', verbose: 'false'
             }
         }
     }
