@@ -20,9 +20,13 @@ pipeline {
             input {
                 message "Do you approve the build on dev?"
                 ok "Yes, I do."
+                parameters {
+                    string(name: 'TAG', defaultValue: 'prod-latest', description: 'Tag die je aan de build wilt geven')
+                }
             }
             steps {
-                echo "Approved the Build"
+                echo "Approved the Build. Tagging with ${TAG}"
+                openshiftTag alias: 'false', apiURL: '', authToken: '', destStream: '$(TAG)', destTag: '', destinationAuthToken: '', destinationNamespace: '', namespace: 'myproject', srcStream: 'demo1', srcTag: '', verbose: 'false'
             }
         }
         
