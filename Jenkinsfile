@@ -37,5 +37,5 @@ pipeline {
     //             echo "Deploy to Prod Step"
     //             openshiftDeploy apiURL: '', authToken: '', depCfg: 'demo1', namespace: 'prod', verbose: 'false', waitTime: '', waitUnit: 'sec'            }
     //     }
-    // }
+    }
 }
