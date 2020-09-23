@@ -4,13 +4,16 @@ pipeline {
     options {
         timeout(time: 20, unit: 'MINUTES') 
     }
+    environment {
+        def stringtijd = 'unknown'
+    }
     stages {
         stage('Pre-build variabelen zetten') {
             steps {
                 script {
                     script {
                         def now = new Date()
-                        def stringtijd = now.format("yyyyMMddHHmm", TimeZone.getTimeZone('UTC'))
+                        stringtijd = now.format("yyyyMMddHHmm", TimeZone.getTimeZone('UTC'))
                     }
                 }
             }
