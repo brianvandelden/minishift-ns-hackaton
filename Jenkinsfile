@@ -27,9 +27,9 @@ pipeline {
             steps {
                 script {
                     def now = new Date()
-                    def stringtijd = now.format("yyMMddHHmm", TimeZone.getTimeZone('UTC'))
+                    def stringtijd = now.format("yyyyMMddHHmm", TimeZone.getTimeZone('UTC'))
                     echo "Tagging with ${stringtijd}"
-                    openshiftTag alias: 'false', apiURL: '', authToken: '', destStream: 'demo1', destTag: "${stringtijd}", destinationAuthToken: '', destinationNamespace: 'myproject', namespace: 'myproject', srcStream: 'demo1', srcTag: 'latest', verbose: 'true'
+                    openshiftTag alias: 'false', apiURL: '', authToken: '', destStream: 'demo1', destTag: "${stringtijd}", destinationAuthToken: '', destinationNamespace: 'myproject', namespace: 'myproject', srcStream: 'demo1', srcTag: 'latest', verbose: 'false'
                 }
             }
         }
