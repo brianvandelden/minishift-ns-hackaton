@@ -7,32 +7,29 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sleep 5
+                echo "Starting build"
                 openshiftBuild apiURL: '', authToken: '', bldCfg: 'demo1', buildName: '', checkForTriggeredDeployments: 'false', commitID: '', namespace: 'myproject', showBuildLogs: 'true', verbose: 'false', waitTime: '1', waitUnit: 'min'            }
-        }
-        stage("Deploy to Dev") {
-            steps {
-                echo "Deploy to Dev Step"
-                sleep 1
             }
+        stage("Trigger deploy to Dev") {
+            steps {
+                    echo "Deploy to Dev Step"
+                    openshiftDeploy apiURL: '', authToken: '', depCfg: 'demo1', namespace: 'myproject', verbose: 'false', waitTime: '', waitUnit: 'sec'            
+                }
         }
         stage("Approve Build") {
             input {
                 message "Do you approve the build on dev?"
-                ok "Yes, we should."
-                // parameters {
-                //     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                ok "Yes, I do."
             }
             steps {
                 echo "Approved the Build"
             }
         }
         
-        stage("Deploy to Prod") {
+        stage("Trigger deploy to Prod") {
             steps {
                 echo "Deploy to Prod Step"
-                sleep 1
-            }
+                openshiftDeploy apiURL: '', authToken: '', depCfg: 'demo1', namespace: 'prod', verbose: 'false', waitTime: '', waitUnit: 'sec'            }
         }
     }
 }
