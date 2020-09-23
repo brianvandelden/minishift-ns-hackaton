@@ -48,7 +48,24 @@ pipeline {
         stage("Trigger deploy to Prod") {
             steps {
                 echo "Deploy to Prod Step"
-                openshiftDeploy apiURL: '', authToken: '', depCfg: 'demo1', namespace: 'prod', verbose: 'false', waitTime: '', waitUnit: 'sec'           
+                // openshiftDeploy apiURL: '', authToken: '', depCfg: 'demo1', namespace: 'prod', verbose: 'false', waitTime: '', waitUnit: 'sec'           
+                openshiftCreateResource apiURL: '', authToken: '', jsonyaml: '''apiVersion: apps.openshift.io/v1
+kind: Deployment
+metadata:
+  name: demo1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo1
+  template:
+    metadata:
+      labels:
+        app: demo1
+    spec:
+      containers:
+      - name: demo1
+        image: myproject/demo1:${stringtijd}''', namespace: 'prod', verbose: 'false'
             }
         }
     }
