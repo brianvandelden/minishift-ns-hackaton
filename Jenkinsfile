@@ -21,7 +21,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Starting build"
-                openshiftBuild apiURL: '', authToken: '', bldCfg: 'demo1', buildName: '', checkForTriggeredDeployments: 'false', commitID: '', namespace: 'myproject', showBuildLogs: 'true', verbose: 'false', waitTime: '1', waitUnit: 'min'            }
+                openshiftBuild apiURL: '', authToken: '', bldCfg: 'demo1', buildName: '', checkForTriggeredDeployments: 'false', commitID: '', namespace: 'myproject', showBuildLogs: 'true', verbose: 'false', waitTime: '2', waitUnit: 'min'            }
             }
         stage("Trigger deploy to Dev") {
             steps {
